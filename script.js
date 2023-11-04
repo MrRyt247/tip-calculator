@@ -6,12 +6,14 @@ $(document).ready(function() {
     function restore() {        // Resets label effect
         label.css({
             'text-transform': 'initial',
-            'font-size': '18px',
+            'font-family': 'Junge, sans-serif',
+            'font-size': '16px',
             'font-weight': '500',
             'line-height': 'initial',
             'letter-spacing': '-.5px',
             'position': 'absolute',
-            'top': '10px'
+            'top': '10px',
+            'color': 'initial'
         })
     }
 
@@ -20,11 +22,13 @@ $(document).ready(function() {
         restore();
         $(this).children('.subitem').children('label').css({
             'text-transform': 'uppercase',
+            'font-family': 'Recursive, sans-serif',
             'font-size': '.65rem',
             'font-weight': '600',
             'line-height': '.65rem',
             'letter-spacing': '1px',
-            'top': '3px'
+            'top': '3px',
+            'color': 'var(--secondary)'
         });
         setTimeout(() => {
             $(this).children('.subitem').children('label').css('position', 'relative');
@@ -42,9 +46,9 @@ $(document).ready(function() {
         }, 1005);
     };
 
-    function calculate() {
+    function calculate() { // Transform switch case to if-else case
         switch ($("#bill").val()) {  // Validating bill input
-            case '':
+            case '' || null:
                 a = 0;
                 $("#logBill").html('Enter a value');
                 shake($("#logBill"));
@@ -60,7 +64,7 @@ $(document).ready(function() {
                 break;
         }
         switch ($("#tip").val()) {  // Validating tip % input
-            case '':
+            case '' || null:
                 b = 0;
                 $("#logTip").html('Enter a value');
                 shake($("#logTip"));
@@ -75,8 +79,27 @@ $(document).ready(function() {
                 $("#logTip").html('');
                 break;
         }
+        switch ($("#tip").val() < 0) {
+            case 'true':
+                b = 0;
+                $("#logTip").html('No debts here');
+                shake($("#logTip"));
+                break;
+            default:
+                b = 1
+                $("#logTip").html('');
+                break;
+        }
+        /*if ($("#tip").val() < 0) {
+            b = 0;
+            $("#logTip").html('No debts here');
+            shake($("#logTip"));
+        } else {
+            b = 1
+            $("#logTip").html('');
+        }*/
         switch ($("#nop").val()) {  // Validating No. of people input
-            case '':
+            case '' || null:
                 c = 0;
                 $("#logNOP").html('Enter a value');
                 shake($("#logNOP"));
@@ -91,6 +114,14 @@ $(document).ready(function() {
                 $("#logNOP").html('');
                 break;
         }
+        /*if ($("#nop").val() < 0) {
+            c = 0;
+            $("#logNOP").html('No debts here');
+            shake($("#logNOP"));
+        } else {
+            c = 1
+            $("#logNOP").html('');
+        }*/
 
         function animateTip(start, value) {
             if (start >= value) {
@@ -181,4 +212,9 @@ $(document).ready(function() {
     }
    
     $(".button").click(calculate);      // Triggers function
+    $(document).keypress(function (e) {
+        if (e.key === 'Enter') {
+            calculate();
+        }
+    });
 });
