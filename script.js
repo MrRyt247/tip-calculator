@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    const inp = $(".wrapper .item");
+    const inputBox = $(".wrapper .item");
     const label = $(".item label");
     let a, b, c = 0; // AND Logic units
 
@@ -17,7 +17,7 @@ $(document).ready(function() {
         })
     }
 
-    inp.on('click', function(e) {       // Label effect
+    inputBox.on('click', function(e) {       // Label effect
         e.stopPropagation();        // Nullifies the .not() method
         restore();
         $(this).children('.subitem').children('label').css({
@@ -35,7 +35,7 @@ $(document).ready(function() {
         }, 120);
     });
 
-    $(document).not(inp).click(function() {     // Resets label effect
+    $(document).not(inputBox).click(function() {     // Resets label effect
         restore();
     })
 
@@ -46,82 +46,62 @@ $(document).ready(function() {
         }, 1005);
     };
 
-    function calculate() { // Transform switch case to if-else case
-        switch ($("#bill").val()) {  // Validating bill input
-            case '' || null:
-                a = 0;
-                $("#logBill").html('Enter a value');
-                shake($("#logBill"));
-                break;
-            case '0':
-                a = 0;
-                $("#logBill").html('Don\'t expect an answer');
-                shake($("#logBill"));
-                break;
-            default:
-                a = 1
-                $("#logBill").html('');
-                break;
+    $(".button").click(() => {      // Glow effect
+        $(".card").css('box-shadow', 'var(--cardShadow), var(--glowShadow)');
+        setTimeout(() => {
+            $(".card").css('box-shadow', 'var(--cardShadow)');
+        }, 800);
+      });
+
+    function calculate() {
+        if ($("#bill").val() === '') {      // Validating bill input
+            a = 0;
+            $("#logBill").html('Enter a value');
+            shake($("#logBill"));
+        } else if ($("#bill").val() === '0') {
+            a = 0;
+            $("#logBill").html('Don\'t expect an answer');
+            shake($("#logBill"));
+        } else if (+$("#bill").val() < 0) {
+            a = 0;
+            $("#logBill").html('No debts here');
+            shake($("#logBill"));
+        } else {
+            a = 1
+            $("#logBill").html('');
         }
-        switch ($("#tip").val()) {  // Validating tip % input
-            case '' || null:
-                b = 0;
-                $("#logTip").html('Enter a value');
-                shake($("#logTip"));
-                break;
-            case '0':
-                b = 0;
-                $("#logTip").html('Don\'t expect an answer');
-                shake($("#logTip"));
-                break;
-            default:
-                b = 1
-                $("#logTip").html('');
-                break;
-        }
-        switch ($("#tip").val() < 0) {
-            case 'true':
-                b = 0;
-                $("#logTip").html('No debts here');
-                shake($("#logTip"));
-                break;
-            default:
-                b = 1
-                $("#logTip").html('');
-                break;
-        }
-        /*if ($("#tip").val() < 0) {
+        if ($("#tip").val() === '') {       // Validating tip % input
+            b = 0;
+            $("#logTip").html('Enter a value');
+            shake($("#logTip"));
+        } else if ($("#tip").val() === '0') {
+            b = 0;
+            $("#logTip").html('Don\'t expect an answer');
+            shake($("#logTip"));
+        } else if (+$("#tip").val() < 0) {
             b = 0;
             $("#logTip").html('No debts here');
             shake($("#logTip"));
         } else {
             b = 1
             $("#logTip").html('');
-        }*/
-        switch ($("#nop").val()) {  // Validating No. of people input
-            case '' || null:
-                c = 0;
-                $("#logNOP").html('Enter a value');
-                shake($("#logNOP"));
-                break;
-            case '0':
-                c = 0;
-                $("#logNOP").html('Don\'t expect an answer');
-                shake($("#logNOP"));
-                break;
-            default:
-                c = 1
-                $("#logNOP").html('');
-                break;
         }
-        /*if ($("#nop").val() < 0) {
+        if ($("#nop").val() === '') {       // Validating No. of people input
+            c = 0;
+            $("#logNOP").html('Enter a value');
+            shake($("#logNOP"));
+        } else if ($("#nop").val() === '0') {
+            c = 0;
+            $("#logNOP").html('Don\'t expect an answer');
+            shake($("#logNOP"));
+        } else if (+$("#nop").val() < 0) {
             c = 0;
             $("#logNOP").html('No debts here');
             shake($("#logNOP"));
         } else {
             c = 1
             $("#logNOP").html('');
-        }*/
+        }
 
         function animateTip(start, value) {
             if (start >= value) {
@@ -132,29 +112,29 @@ $(document).ready(function() {
                     $("#tipAmount").html((start).toFixed(2));
                     if (start + 0.01 >= value) {
                         clearInterval(ansFx);
-                    }
+                    }  
                 }, 1);
                 $(".skip").click(() => {    // Interrupts the effect
                     clearInterval(ansFx);
-                    $("#tipAmount").html(tip);               // Displays final answer
-                });     
+                    $("#tipAmount").html(tip);      // Displays final answer
+                });   
             }
         }
 
-        const arr = ['', '.', '..', '...']; // For Calculating text effect
+        const arr = ['', '.', '..', '...'];     // For Calculating text effect
         let count = 0;
 
         function animateTotal(start, value) {
             if (start >= value) {
                 // Do nothing
             } else {
-                $(".button img").hide();    // Hides img
-                $(".button").text("Calculating");    // Displays Calculating text
+                $(".button img").hide();        // Hides img
+                $(".button").text("Calculating").off('click', calculate);       // Displays Calculating text & prevents multiple clicks
                 $(".skip").css('display', 'flex');
-                setTimeout(() => {  // Displays the skip button
+                setTimeout(() => {                  // Displays the skip button
                     $(".skip").css({filter: 'opacity(1)'});
                 }, 3000);
-                const textFx = setInterval(() => {  // Calculating text effect
+                const textFx = setInterval(() => {      // Calculating text effect
                     count++;
                     if (count === 4) {
                         count = 0;
@@ -163,17 +143,17 @@ $(document).ready(function() {
                 }, 1000);
                 const ansFx = setInterval(() => {    // Answer generating effect
                     start += 0.01;
-                    $("#total").html((start).toFixed(2));
+                    $("#total").html((start).toFixed(2));  
                     if (start + 0.01 >= value) {    // Check if its answer is gotten
                         clearInterval(ansFx);   // Ends the generating effect
                         clearInterval(textFx);  // Ends the text effect
-                        $(".button").text("").append('<img>').one('click', calculate);     // Creates the arrow-up image and one-click event listener 
+                        $(".button").text("").append('<img>').click(calculate);     // Creates the arrow-up image
                         $(".button img").addClass("arrow").attr({src: 'assets/arrow-down-svgrepo-com.svg', alt: 'arrow-up'});
                         $(".skip").css({filter: 'opacity(0)'});     // Hides skip button
                         setTimeout(() => {
                             $(".skip").css('display', 'none');
                         }, 120);
-                    }
+                    }                                    
                 }, 1);
                 $(".skip").click(() => {    // Interrupts the effects
                     clearInterval(ansFx);
@@ -206,10 +186,10 @@ $(document).ready(function() {
         }
     }
    
-    $(".button").one('click', calculate);      // Triggers function
+    $(".button").click(calculate);      // Triggers function
     $(document).keypress(function (e) {
         if (e.key === 'Enter') {
-            $(".button").one('click', calculate);
+            calculate();
         }
     });
 });
