@@ -165,14 +165,14 @@ $(document).ready(function() {
                     start += 0.01;
                     $("#total").html((start).toFixed(2));
                     if (start + 0.01 >= value) {    // Check if its answer is gotten
+                        clearInterval(ansFx);   // Ends the generating effect
+                        clearInterval(textFx);  // Ends the text effect
                         $(".button").text("").append('<img>').one('click', calculate);     // Creates the arrow-up image and one-click event listener 
                         $(".button img").addClass("arrow").attr({src: 'assets/arrow-down-svgrepo-com.svg', alt: 'arrow-up'});
                         $(".skip").css({filter: 'opacity(0)'});     // Hides skip button
                         setTimeout(() => {
                             $(".skip").css('display', 'none');
                         }, 120);
-                        clearInterval(ansFx);   // Ends the generating effect
-                        clearInterval(textFx);  // Ends the text effect
                     }
                 }, 1);
                 $(".skip").click(() => {    // Interrupts the effects
@@ -189,13 +189,8 @@ $(document).ready(function() {
             }
         }
 
-        var tip = ($("#bill").val() * ($("#tip").val() / 100) / $("#nop").val()).toFixed(2),  // variables for the answers
+        var tip = ($("#bill").val() * ($("#tip").val() / 100) / $("#nop").val()).toFixed(2),  // Variables for the answers
             total = ($("#bill").val() * (($("#tip").val() / 100) + 1) / $("#nop").val()).toFixed(2);
-
-        function answer() {          
-            $("#tipAmount").html(tip);
-            $("#total").html(total);
-        }
 
         function clearScreen() {
             $("#tipAmount").html('0.00');
