@@ -133,11 +133,11 @@ $(document).ready(function() {
                     if (start + 0.01 >= value) {
                         clearInterval(ansFx);
                     }
-                    $(".skip").click(() => {    // Interrupts the effect
-                        clearInterval(ansFx);
-                        $("#tipAmount").html(tip);               // Displays final answer
-                    });     
                 }, 1);
+                $(".skip").click(() => {    // Interrupts the effect
+                    clearInterval(ansFx);
+                    $("#tipAmount").html(tip);               // Displays final answer
+                });     
             }
         }
 
@@ -174,18 +174,18 @@ $(document).ready(function() {
                         clearInterval(ansFx);   // Ends the generating effect
                         clearInterval(textFx);  // Ends the text effect
                     }
-                    $(".skip").click(() => {    // Interrupts the effects
-                        $(".button").text("").append('<img>').click(calculate);     // Fixes button
-                        $(".button img").addClass("arrow").attr({src: 'assets/arrow-down-svgrepo-com.svg', alt: 'arrow-up'});
-                        $(".skip").css({filter: 'opacity(0)'});
-                        setTimeout(() => {
-                            $(".skip").css('display', 'none');
-                        }, 120);
-                        clearInterval(ansFx);
-                        clearInterval(textFx);
-                        $("#total").html(total);               // Displays final answer
-                    });   
                 }, 1);
+                $(".skip").click(() => {    // Interrupts the effects
+                    clearInterval(ansFx);
+                    clearInterval(textFx);
+                    $(".button").text("").append('<img>').click(calculate);     // Fixes button
+                    $(".button img").addClass("arrow").attr({src: 'assets/arrow-down-svgrepo-com.svg', alt: 'arrow-up'});
+                    $(".skip").css({filter: 'opacity(0)'});
+                    setTimeout(() => {
+                        $(".skip").css('display', 'none');
+                    }, 120);
+                    $("#total").html(total);               // Displays final answer
+                });   
             }
         }
 
