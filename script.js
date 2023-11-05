@@ -149,7 +149,7 @@ $(document).ready(function() {
                 // Do nothing
             } else {
                 $(".button img").hide();    // Hides img
-                $(".button").text("Calculating").off('click', calculate); // Avoids interruption during calculation
+                $(".button").text("Calculating");    // Displays Calculating text
                 $(".skip").css('display', 'flex');
                 setTimeout(() => {  // Displays the skip button
                     $(".skip").css({filter: 'opacity(1)'});
@@ -165,7 +165,7 @@ $(document).ready(function() {
                     start += 0.01;
                     $("#total").html((start).toFixed(2));
                     if (start + 0.01 >= value) {    // Check if its answer is gotten
-                        $(".button").text("").append('<img>').click(calculate);     // Creates the arrow-up image
+                        $(".button").text("").append('<img>').one('click', calculate);     // Creates the arrow-up image and one-click event listener 
                         $(".button img").addClass("arrow").attr({src: 'assets/arrow-down-svgrepo-com.svg', alt: 'arrow-up'});
                         $(".skip").css({filter: 'opacity(0)'});     // Hides skip button
                         setTimeout(() => {
@@ -211,10 +211,10 @@ $(document).ready(function() {
         }
     }
    
-    $(".button").click(calculate);      // Triggers function
+    $(".button").one('click', calculate);      // Triggers function
     $(document).keypress(function (e) {
         if (e.key === 'Enter') {
-            calculate();
+            $(".button").one('click', calculate);
         }
     });
 });
