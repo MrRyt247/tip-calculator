@@ -3,8 +3,8 @@ $(document).ready(function() {
     const label = $(".item label");
     let a, b, c = 0; // AND Logic units
     
-    let country = '',
-        locale = '';
+    let country = 'Ghana',
+        locale = 'en-GH';         // Default if locale to be found is undefined
     if(navigator.geolocation) {     // Gets country from location coordinates API
         navigator.geolocation.getCurrentPosition((pos) => {
             $.getJSON(`http://api.geonames.org/countryCode?`, {     // API itself
@@ -19,7 +19,6 @@ $(document).ready(function() {
                         if (country === value.name) {
                             //console.log(value.currency.symbol);
                             $(".currency").text(value.currency.symbol);
-                            locale = 'en-US';                   // Default if locale be to found is empty
                             locale = `${value.language.code}-${value.code}`;
                             //console.log(locale);
                             //console.log(value.currency.code);
