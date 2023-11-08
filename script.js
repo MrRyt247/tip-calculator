@@ -1,11 +1,36 @@
 $(document).ready(function() {
     const inputBox = $(".wrapper .item");
     const label = $(".item label");
-    //var subitemHeight = $('.screen > .item > .subitem');
-    //var priceHeight = $('.screen > .item > .price');
-
     let a, b, c = 0; // AND Logic units
-
+    
+    let country = '',
+        locale = '';
+    if(navigator.geolocation) {     // Gets country from location coordinates API
+        navigator.geolocation.getCurrentPosition((pos) => {
+            $.getJSON(`http://api.geonames.org/countryCode?`, {     // API itself
+                lat: (pos.coords.latitude.toFixed(4)),
+                lng: (pos.coords.longitude).toFixed(4),
+                type: 'JSON',
+                username: 'mrryt247'
+            }, (res) => {
+                country = res.countryName;
+                $.getJSON('https://gist.githubusercontent.com/amitjambusaria/b9adebcb4f256eae3dfa64dc9f1cc2ef/raw/6431d72439c8399b05d2b8e9d51153e5dee7ad3b/countries.json', (data) => {
+                    $.each(data, function(index, value) {       // Above line gets country and currency symbol
+                        if (country === value.name) {
+                            //console.log(value.currency.symbol);
+                            $(".currency").text(value.currency.symbol);
+                            locale = 'en-US';                   // Default if locale be to found is empty
+                            locale = `${value.language.code}-${value.code}`;
+                            //console.log(locale);
+                            //console.log(value.currency.code);
+                        }
+                        return;                              
+                    })
+                })
+            })
+        })   
+    }
+    
     function restore() {        // Resets label effect
         label.css({
             'text-transform': 'initial',
@@ -41,21 +66,7 @@ $(document).ready(function() {
     $(document).not(inputBox).click(function() {     // Resets label effect
         restore();
     })
-
-    function shake(target) {           // Log animation
-        target.css("animation", "shake 1s ease-in-out alternate");
-        setTimeout(() => {
-          target.css('animation', 'unset');
-        }, 1005);
-    };
-
-    $(".button").click(() => {      // Glow effect
-        $(".card").css('box-shadow', 'var(--cardShadow), var(--glowShadow)');
-        setTimeout(() => {
-            $(".card").css('box-shadow', 'var(--cardShadow)');
-        }, 800);
-      });
-
+    
     function calculate() {
         if ($("#bill").val() === '') {      // Validating bill input
             a = 0;
@@ -204,41 +215,25 @@ $(document).ready(function() {
             clearScreen();
         }
     }
-   
+
+    function shake(target) {           // Log animation
+        target.css("animation", "shake 1s ease-in-out alternate");
+        setTimeout(() => {
+          target.css('animation', 'unset');
+        }, 1005);
+    };
+
+    $(".button").click(() => {      // Glow effect
+        $(".card").css('box-shadow', 'var(--cardShadow), var(--glowShadow)');
+        setTimeout(() => {
+            $(".card").css('box-shadow', 'var(--cardShadow)');
+        }, 800);
+      });
+    
     $(".button").click(calculate);      // Triggers function
     $(document).keypress(function (e) {
         if (e.key === 'Enter') {
             calculate();
         }
     });
-
-    let country = '',
-        locale = '',
-        curr = '';
-    if(navigator.geolocation) {     // Gets country from location coordinates API
-        navigator.geolocation.getCurrentPosition((pos) => {
-            $.getJSON(`http://api.geonames.org/countryCode?`, {     // API itself
-                lat: (pos.coords.latitude.toFixed(4)),
-                lng: (pos.coords.longitude).toFixed(4),
-                type: 'JSON',
-                username: 'mrryt247'
-            }, (res) => {
-                country = res.countryName;
-                $.getJSON('https://gist.githubusercontent.com/amitjambusaria/b9adebcb4f256eae3dfa64dc9f1cc2ef/raw/6431d72439c8399b05d2b8e9d51153e5dee7ad3b/countries.json', (data) => {
-                    $.each(data, function(index, value) {       // Above line gets country and currency symbol
-                        if (country === value.name) {
-                            //console.log(value.currency.symbol);
-                            $(".currency").text(value.currency.symbol);
-                            locale = 'en-US';                   // Default if locale be to found is empty
-                            locale = `${value.language.code}-${value.code}`;
-                            //console.log(locale);
-                            curr = value.currency.code;
-                            //console.log(curr);
-                        }
-                        return;                              
-                    })
-                })
-            })
-        })   
-    }
 });
