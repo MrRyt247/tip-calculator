@@ -1,6 +1,9 @@
 $(document).ready(function() {
     const inputBox = $(".wrapper .item");
     const label = $(".item label");
+    //var subitemHeight = $('.screen > .item > .subitem');
+    //var priceHeight = $('.screen > .item > .price');
+
     let a, b, c = 0; // AND Logic units
 
     function restore() {        // Resets label effect
@@ -98,10 +101,20 @@ $(document).ready(function() {
             c = 0;
             $("#logNOP").html('No debts here');
             shake($("#logNOP"));
+        } else if (+$("#nop").val() - parseInt(+$("#nop").val()) !== 0) {
+            c = 0;
+            $("#logNOP").html('Invalid');
+            shake($("#logNOP"));
         } else {
             c = 1
             $("#logNOP").html('');
         }
+      
+        var formatNumber = new Intl.NumberFormat(locale, {
+            style: "decimal",
+            notation: "compact",
+            minimumFractionDigits: 2
+        })
 
         function animateTip(start, value) {
             if (start >= value) {
@@ -109,17 +122,23 @@ $(document).ready(function() {
             } else {
                 const ansFx = setInterval(() => {
                     start += 0.01;
-                    $("#tipAmount").html((start).toFixed(2));
+                    $("#tipAmount").html(formatNumber.format(start));
                     if (start + 0.01 >= value) {
                         clearInterval(ansFx);
                     }  
                 }, 1);
                 $(".skip").click(() => {    // Interrupts the effect
                     clearInterval(ansFx);
-                    $("#tipAmount").html(tip);      // Displays final answer
+                    $("#tipAmount").html(formatNumber.format(tip));      // Displays final answer
                 });   
             }
         }
+
+        /*const formatNumber = new Intl.NumberFormat(locale, {
+            style: "decimal",
+            notation: "standard",
+            minimumFractionDigits: 2
+        })*/
 
         const arr = ['', '.', '..', '...'];     // For Calculating text effect
         let count = 0;
@@ -143,7 +162,7 @@ $(document).ready(function() {
                 }, 1000);
                 const ansFx = setInterval(() => {    // Answer generating effect
                     start += 0.01;
-                    $("#total").html((start).toFixed(2));  
+                    $("#total").html(formatNumber.format(start));  
                     if (start + 0.01 >= value) {    // Check if its answer is gotten
                         clearInterval(ansFx);   // Ends the generating effect
                         clearInterval(textFx);  // Ends the text effect
@@ -164,7 +183,7 @@ $(document).ready(function() {
                     setTimeout(() => {
                         $(".skip").css('display', 'none');
                     }, 120);
-                    $("#total").html(total);               // Displays final answer
+                    $("#total").html(formatNumber.format(total));               // Displays final answer
                 });   
             }
         }
@@ -192,4 +211,34 @@ $(document).ready(function() {
             calculate();
         }
     });
+
+    let country = '',
+        locale = '',
+        curr = '';
+    if(navigator.geolocation) {     // Gets country from location coordinates API
+        navigator.geolocation.getCurrentPosition((pos) => {
+            $.getJSON(`http://api.geonames.org/countryCode?`, {     // API itself
+                lat: (pos.coords.latitude.toFixed(4)),
+                lng: (pos.coords.longitude).toFixed(4),
+                type: 'JSON',
+                username: 'mrryt247'
+            }, (res) => {
+                country = res.countryName;
+                $.getJSON('https://gist.githubusercontent.com/amitjambusaria/b9adebcb4f256eae3dfa64dc9f1cc2ef/raw/6431d72439c8399b05d2b8e9d51153e5dee7ad3b/countries.json', (data) => {
+                    $.each(data, function(index, value) {       // Above line gets country and currency symbol
+                        if (country === value.name) {
+                            //console.log(value.currency.symbol);
+                            $(".currency").text(value.currency.symbol);
+                            locale = 'en-US';                   // Default if locale be to found is empty
+                            locale = `${value.language.code}-${value.code}`;
+                            //console.log(locale);
+                            curr = value.currency.code;
+                            //console.log(curr);
+                        }
+                        return;                              
+                    })
+                })
+            })
+        })   
+    }
 });

@@ -82,7 +82,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    row-gap: 5px;
+    row-gap: 2px;
     margin-top: .5rem;
 }
 
@@ -96,15 +96,15 @@ body {
 .screen > .item > .subitem {
     display: flex;
     flex-direction: column;
+    margin-right: 2px;
 }
 
 .screen > .item > .subitem > span:first-child {
     font-family: Junge, sans-serif;
     font-size: 16px;
     font-weight: 700;
-    line-height: 18px;
+    line-height: 17px;
 }
-
 
 .screen > .item > .subitem > span:last-child {
     font-family: Recursive, sans-serif;
@@ -121,7 +121,16 @@ body {
     font-weight: 700;
     line-height: 32px;
     display: flex;
-    column-gap: 3px;
+    margin-left: 2px;
+    overflow: scroll hidden;
+}
+
+.screen > .item > .price::-webkit-scrollbar {
+    height: 1px;
+}
+
+.screen > .item > .price::-webkit-scrollbar-thumb {
+    background-color: #003a0050;  
 }
 
 .screen > .item > .price > .currency {
