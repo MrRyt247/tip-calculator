@@ -120,6 +120,9 @@ $(document).ready(function() {
             c = 1
             $("#logNOP").html('');
         }
+        
+        var tip = ($("#bill").val() * ($("#tip").val() / 100) / $("#nop").val()).toFixed(2),  // Variables for the answers
+            total = ($("#bill").val() * (($("#tip").val() / 100) + 1) / $("#nop").val()).toFixed(2);
       
         var formatNumber = new Intl.NumberFormat(locale, {
             style: "decimal",
@@ -144,12 +147,6 @@ $(document).ready(function() {
                 });   
             }
         }
-
-        /*const formatNumber = new Intl.NumberFormat(locale, {
-            style: "decimal",
-            notation: "standard",
-            minimumFractionDigits: 2
-        })*/
 
         const arr = ['', '.', '..', '...'];     // For Calculating text effect
         let count = 0;
@@ -198,9 +195,6 @@ $(document).ready(function() {
                 });   
             }
         }
-
-        var tip = ($("#bill").val() * ($("#tip").val() / 100) / $("#nop").val()).toFixed(2),  // Variables for the answers
-            total = ($("#bill").val() * (($("#tip").val() / 100) + 1) / $("#nop").val()).toFixed(2);
 
         function clearScreen() {
             $("#tipAmount").html('0.00');
