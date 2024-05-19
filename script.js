@@ -7,7 +7,7 @@ $(document).ready(function() {
         locale = 'en-GH';         // Default if locale to be found is undefined
     if(navigator.geolocation) {     // Gets country from location coordinates API
         navigator.geolocation.getCurrentPosition((pos) => {
-            $.getJSON(`http://api.geonames.org/countryCode?`, {     // API itself
+            $.getJSON(`https://secure.geonames.org/countryCode?`, {     // API itself
                 lat: (pos.coords.latitude.toFixed(4)),
                 lng: (pos.coords.longitude).toFixed(4),
                 type: 'JSON',
@@ -17,11 +17,8 @@ $(document).ready(function() {
                 $.getJSON('https://gist.githubusercontent.com/amitjambusaria/b9adebcb4f256eae3dfa64dc9f1cc2ef/raw/6431d72439c8399b05d2b8e9d51153e5dee7ad3b/countries.json', (data) => {
                     $.each(data, function(index, value) {       // Above line gets country and currency symbol
                         if (country === value.name) {
-                            //console.log(value.currency.symbol);
                             $(".currency").text(value.currency.symbol);
                             locale = `${value.language.code}-${value.code}`;
-                            //console.log(locale);
-                            //console.log(value.currency.code);
                         }
                         return;                              
                     })
