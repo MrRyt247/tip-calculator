@@ -1,3 +1,4 @@
+# .github/workflows/deploy.yml
 name: Deploy to GitHub Pages
 
 on:
@@ -5,12 +6,12 @@ on:
     branches:
       - main
   workflow_dispatch:
-  
+
 permissions:
   contents: write
   pages: write
   id-token: write
-  
+
 jobs:
   build-and-deploy:
     concurrency: ci-${{ github.ref }}
@@ -44,4 +45,3 @@ jobs:
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: 'Deploy: ${{ github.sha }}'
-          full_commit_message: 'Deploy: ${{ github.event.head_commit.message }}'
