@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg" sizes="64x64" href="/assets/favicon.png" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css?family=Junge" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Recursive" rel="stylesheet" />
+  <title>Tip Calculator</title>
+  <script type="module" crossorigin src="/script.js"></script>
+  <link rel="stylesheet" crossorigin href="/style.css">
+</head>
+
+<body>
+  <div class="card">
+    <div class="banner">
+      <p>Tip Calculator</p>
+    </div>
+    <div class="screen">
+      <div class="item">
+        <div class="subitem">
+          <span>Tip Amount</span>
+          <span>/ person</span>
+        </div>
+        <div class="price">
+          <span class="currency">$</span>
+          <span id="tipAmount">0.00</span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="subitem">
+          <span>Total</span>
+          <span>/ person</span>
+        </div>
+        <div class="price">
+          <span class="currency">$</span>
+          <span id="total">0.00</span>
+        </div>
+      </div>
+    </div>
+    <div class="button">
+      <img
+        src="data:image/svg+xml,%3c!DOCTYPE%20svg%20PUBLIC%20'-//W3C//DTD%20SVG%201.1//EN'%20'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Transformed%20by:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20width='800px'%20height='800px'%20viewBox='0%200%2024%2024'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%20stroke='%23000000'%3e%3cg%20id='SVGRepo_bgCarrier'%20stroke-width='0'/%3e%3cg%20id='SVGRepo_tracerCarrier'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3cg%20id='SVGRepo_iconCarrier'%3e%3cpath%20d='M12%2020L18%2014M12%2020L6%2014M12%2020L12%209.5M12%204V6.5'%20stroke='%23ffffff'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/g%3e%3c/svg%3e"
+        class="arrow" alt="arrow-up" />
+    </div>
+    <div class="wrapper">
+      <div class="item">
+        <div class="subitem">
+          <label>Bill</label>
+          <p class="log" id="logBill"></p>
+        </div>
+        <input type="number" id="bill" inputmode="numeric" placeholder="40.00" min="0" />
+      </div>
+      <div class="item">
+        <div class="subitem">
+          <label>Tip %</label>
+          <p class="log" id="logTip"></p>
+        </div>
+        <input type="number" id="tip" inputmode="numeric" placeholder="15" min="0" />
+      </div>
+      <div class="item">
+        <div class="subitem">
+          <label>Number of People</label>
+          <p class="log" id="logNOP"></p>
+        </div>
+        <input type="number" id="nop" inputmode="numeric" placeholder="3" min="0" />
+      </div>
+    </div>
+    <div class="skip">
+      <img
+        src="data:image/svg+xml,%3c!DOCTYPE%20svg%20PUBLIC%20'-//W3C//DTD%20SVG%201.1//EN'%20'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Transformed%20by:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20width='800px'%20height='800px'%20viewBox='0%200%2048%2048'%20xmlns='http://www.w3.org/2000/svg'%20fill='%23ffffff'%20stroke='%23ffffff'%20stroke-width='0.00048000000000000007'%20transform='rotate(0)'%3e%3cg%20id='SVGRepo_bgCarrier'%20stroke-width='0'/%3e%3cg%20id='SVGRepo_tracerCarrier'%20stroke-linecap='round'%20stroke-linejoin='round'%20stroke='%23CCCCCC'%20stroke-width='0.096'/%3e%3cg%20id='SVGRepo_iconCarrier'%3e%3ctitle%3eskip-next%3c/title%3e%3cg%20id='Layer_2'%20data-name='Layer%202'%3e%3cg%20id='invisible_box'%20data-name='invisible%20box'%3e%3crect%20width='48'%20height='48'%20fill='none'/%3e%3c/g%3e%3cg%20id='icons_Q2'%20data-name='icons%20Q2'%3e%3cg%3e%3cpath%20d='M34,10a2,2,0,0,0-2,2V36a2,2,0,0,0,4,0V12A2,2,0,0,0,34,10Z'/%3e%3cpath%20d='M15.5,10.6a2.1,2.1,0,0,0-2.7-.2,1.9,1.9,0,0,0-.2,3L23.2,24,12.6,34.6a1.9,1.9,0,0,0,.2,3,2.1,2.1,0,0,0,2.7-.2l11.9-12a1.9,1.9,0,0,0,0-2.8Z'/%3e%3c/g%3e%3c/g%3e%3c/g%3e%3c/g%3e%3c/svg%3e"
+        alt="skip" />
+    </div>
+  </div>
+  <p id="footer">Designed by <span>Mr. Ryt</span></p>
+</body>
+
+</html>
