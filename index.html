@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="64x64"
+      href="./src/assets/favicon.png"
+    />
+    <link rel="stylesheet" href="./src/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Junge"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Recursive"
+      rel="stylesheet"
+    />
+    <title>Tip Calculator</title>
+  </head>
+
+  <body>
+    <div class="card">
+      <div class="banner">
+        <p>Tip Calculator</p>
+      </div>
+      <div class="screen">
+        <div class="item">
+          <div class="subitem">
+            <span>Tip Amount</span>
+            <span>/ person</span>
+          </div>
+          <div class="price">
+            <span class="currency">$</span>
+            <span id="tipAmount">0.00</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="subitem">
+            <span>Total</span>
+            <span>/ person</span>
+          </div>
+          <div class="price">
+            <span class="currency">$</span>
+            <span id="total">0.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="button">
+        <img
+          src="./src/assets/arrow-down-svgrepo-com.svg"
+          class="arrow"
+          alt="arrow-up"
+        />
+      </div>
+      <div class="wrapper">
+        <div class="item">
+          <div class="subitem">
+            <label>Bill</label>
+            <p class="log" id="logBill"></p>
+          </div>
+          <input
+            type="number"
+            id="bill"
+            inputmode="numeric"
+            placeholder="40.00"
+            min="0"
+          />
+        </div>
+        <div class="item">
+          <div class="subitem">
+            <label>Tip %</label>
+            <p class="log" id="logTip"></p>
+          </div>
+          <input
+            type="number"
+            id="tip"
+            inputmode="numeric"
+            placeholder="15"
+            min="0"
+          />
+        </div>
+        <div class="item">
+          <div class="subitem">
+            <label>Number of People</label>
+            <p class="log" id="logNOP"></p>
+          </div>
+          <input
+            type="number"
+            id="nop"
+            inputmode="numeric"
+            placeholder="3"
+            min="0"
+          />
+        </div>
+      </div>
+      <div class="skip">
+        <img src="./src/assets/skip-next-svgrepo-com.svg" alt="skip" />
+      </div>
+    </div>
+    <p id="footer">Designed by <span>Mr. Ryt</span></p>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
