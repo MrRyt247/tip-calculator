@@ -11,11 +11,9 @@
   --bannerShadow: 2px 2px 4px #0006;
   --textShadow: 1px 1.5px 3px #0007;
 }
-
 * {
   margin: 0;
 }
-
 body {
   height: 100vh;
   width: 100%;
@@ -25,7 +23,6 @@ body {
   background-color: var(--lightgray);
   overflow: hidden auto;
 }
-
 .card {
   height: var(--cardHeight);
   width: var(--cardWidth);
@@ -43,7 +40,6 @@ body {
   box-sizing: border-box;
   position: relative;
 }
-
 .banner {
   position: relative;
   left: -2.5rem;
@@ -65,8 +61,7 @@ body {
   -webkit-user-select: none;
   user-select: none;
 }
-
-.banner::after {
+.banner:after {
   content: "";
   position: absolute;
   top: 100%;
@@ -77,7 +72,6 @@ body {
   transform: skew(45deg);
   z-index: -1;
 }
-
 .screen {
   display: flex;
   flex-direction: column;
@@ -85,27 +79,23 @@ body {
   row-gap: 2px;
   margin-top: 0.5rem;
 }
-
 .screen > .item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-family: Junge, sans-serif;
 }
-
 .screen > .item > .subitem {
   display: flex;
   flex-direction: column;
   margin-right: 2px;
 }
-
 .screen > .item > .subitem > span:first-child {
   font-family: Junge, sans-serif;
   font-size: 16px;
   font-weight: 700;
   line-height: 17px;
 }
-
 .screen > .item > .subitem > span:last-child {
   font-family: Recursive, sans-serif;
   font-size: 12px;
@@ -114,7 +104,6 @@ body {
   filter: opacity(0.6);
   color: var(--secondary);
 }
-
 .screen > .item > .price {
   font-family: Junge, sans-serif;
   font-size: 30px;
@@ -124,25 +113,21 @@ body {
   margin-left: 2px;
   overflow: scroll hidden;
 }
-
 .screen > .item > .price::-webkit-scrollbar {
   height: 1px;
 }
-
 .screen > .item > .price::-webkit-scrollbar-thumb {
   background-color: #003a0050;
 }
-
 .screen > .item > .price > .currency {
   font-family: Recursive, sans-serif;
   font-size: 16px;
   font-weight: 500;
 }
-
 .button {
   height: 32px;
   border: solid 1px transparent;
-  border-radius: 0px;
+  border-radius: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -154,19 +139,16 @@ body {
   -webkit-user-select: none;
   user-select: none;
 }
-
 .button > .arrow {
   height: 30px;
   transform: rotate(180deg);
 }
-
 .wrapper {
   display: flex;
   flex-direction: column;
   row-gap: 5px;
   font-family: Junge, sans-serif;
 }
-
 .wrapper > .item {
   height: 31px;
   display: flex;
@@ -174,7 +156,6 @@ body {
   justify-content: flex-end;
   position: relative;
 }
-
 label {
   font-family: Junge, sans-serif;
   font-size: 16px;
@@ -183,9 +164,8 @@ label {
   user-select: none;
   position: absolute;
   top: 10px;
-  transition: all 120ms ease-out;
+  transition: all 0.12s ease-out;
 }
-
 input {
   height: 20px;
   border: none;
@@ -193,28 +173,24 @@ input {
   padding: 0;
   text-align: right;
   outline: transparent;
-  color: black;
+  color: #000;
   background-color: transparent;
   font-family: Junge, Recursive, sans-serif;
   font-size: 18px;
-  transition: all 120ms ease-out;
+  transition: all 0.12s ease-out;
 }
-
 ::placeholder {
   color: var(--secondary);
   font-family: Junge, Recursive, sans-serif;
   font-size: 16px;
   opacity: 0.3;
 }
-
 input:hover {
   border-bottom: solid 1px var(--primary);
 }
-
 input:focus {
   border-bottom: solid 2px var(--primary);
 }
-
 .log {
   color: var(--logError);
   font-family: Recursive, monospace;
@@ -224,7 +200,6 @@ input:focus {
   -webkit-user-select: none;
   user-select: none;
 }
-
 .skip {
   width: min-content;
   border: solid 1px transparent;
@@ -238,13 +213,11 @@ input:focus {
   transform: translate(-50%, -50%);
   cursor: pointer;
   filter: opacity(0);
-  transition: all 120ms ease-out;
+  transition: all 0.12s ease-out;
 }
-
 .skip > img {
   width: 35px;
 }
-
 #footer {
   margin-block: 0;
   margin-inline: auto;
@@ -253,34 +226,30 @@ input:focus {
   -webkit-user-select: none;
   user-select: none;
 }
-
 #footer span {
   color: red;
 }
-
 @keyframes shake {
   0% {
-    transform: translateX(0);
+    transform: translate(0);
   }
   20% {
-    transform: translateX(-10px);
+    transform: translate(-10px);
   }
   40% {
-    transform: translateX(0);
+    transform: translate(0);
   }
   60% {
-    transform: translateX(-10px);
+    transform: translate(-10px);
   }
   80% {
-    transform: translateX(0);
+    transform: translate(0);
   }
 }
-
 @media screen and (max-width: 300px) {
   .card {
     padding: 1.5rem 1rem;
   }
-
   .banner {
     left: -1.5rem;
     top: 1rem;
@@ -288,7 +257,6 @@ input:focus {
     padding-left: 1rem;
   }
 }
-
 @media screen and (max-height: 478px) {
   .card {
     margin-block: 4rem;
